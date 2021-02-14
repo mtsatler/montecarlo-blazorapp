@@ -1,0 +1,58 @@
+﻿@page "/userinput"
+
+<h3>Razor Component for Input</h3>
+
+
+
+<!-- Get all user input except for asset allocation
+    
+    Initial Portfolio Amount
+    Annual Withdrawel Amount
+    Simulation Time Period
+    Rebalancing - None, Annual or Semi-Annual
+    Number of Simulations - Add later
+    
+    -->
+
+<div>
+    
+    <h4>Initial Portfolio Amount</h4>
+
+    <input placeholder="Portfolio Amount" @bind="getUserInput"/>
+    <button @onclick="GetPortfolioAmount">Submit</button>
+
+    <br />
+    <p>User input stored: @initialPortfolioAmountInt</p>
+
+    <form>
+        <label for="fname">First name: </label><br />
+        <input type="text" id="fname" name="fname" @bind="fName" /><br />
+
+    </form>
+    <br />
+    <br />
+    <p>First Name input : @fName</p>
+
+
+</div>
+
+
+@code {
+
+    int initialPortfolioAmountInt = 0;
+
+    private string getUserInput;
+
+    private string fName;
+
+    private void GetPortfolioAmount()
+    {
+        initialPortfolioAmountInt = int.Parse(getUserInput);
+    }
+
+    private void ProcessInput()
+    {
+        
+    }
+
+}
