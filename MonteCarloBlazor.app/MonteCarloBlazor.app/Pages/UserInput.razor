@@ -1,6 +1,6 @@
 ﻿@page "/userinput"
 
-<h3>Razor Component for Input</h3>
+<h3>Monte Carlo Simulation Input</h3>
 
 
 
@@ -15,44 +15,83 @@
     -->
 
 <div>
-    
-    <h4>Initial Portfolio Amount</h4>
-
-    <input placeholder="Portfolio Amount" @bind="getUserInput"/>
-    <button @onclick="GetPortfolioAmount">Submit</button>
 
     <br />
-    <p>User input stored: @initialPortfolioAmountInt</p>
+    <br />
 
-    <form>
-        <label for="fname">First name: </label><br />
-        <input type="text" id="fname" name="fname" @bind="fName" /><br />
 
+    <input placeholder="Portfolio Amount" @bind="getPortfolioAmount" />
+    <br />
+    <br />
+    <input placeholder="Annual Withdrawal Amount" @bind="getWithdrawalAmount" />
+    <br />
+    <br />
+    <form >
+        <label for="YearsToSimSelection">How Many Years to Sim</label>
+        <select name="yearstosim" @onchange="GetYearsToSimSelection">
+            <option value="10">10 Years</option>
+            <option value="20">20 Years</option>
+            <option value="30">30 years</option>
+        </select>
     </form>
     <br />
+    <form>
+        <label for="RebalancingSelection">Rebalance How Often</label>
+        <select name="rebalance"  @onchange="GetRebalancingSelection">
+            <option value="None">None</option>
+            <option value="Semi-Annual">Semi-Annual</option>
+            <option value="Annual">Annual</option>
+        </select>
+    </form>
+
+    <input type="button" @onclick="SendUserInput" value="Run Monte Carlo"/>
+
     <br />
-    <p>First Name input : @fName</p>
-
-
+   
+    
+       
 </div>
 
 
 @code {
 
-    int initialPortfolioAmountInt = 0;
+    //stores starting value of our portfolio
+    private int initialValue = 0;
 
-    private string getUserInput;
+    //stores annual withdrawal amount
+    private int annualWithdrawal =0;
 
-    private string fName;
+    //stores number of years to sim
+    private int yearsToSim = 10;
 
-    private void GetPortfolioAmount()
+    private string getWithdrawalAmount;
+
+    private string getPortfolioAmount;
+
+    //when to rebalance if ever
+    private string rebalancingSelection = "None";
+
+    private void GetUserInput()
     {
-        initialPortfolioAmountInt = int.Parse(getUserInput);
+        initialValue = int.Parse(getPortfolioAmount);
+        annualWithdrawal = int.Parse(getWithdrawalAmount);
     }
 
-    private void ProcessInput()
+
+    private void GetRebalancingSelection(ChangeEventArgs args)
     {
-        
+        rebalancingSelection = args.Value.ToString();
     }
+
+    private void GetYearsToSimSelection(ChangeEventArgs args)
+    {
+        yearsToSim = int.Parse(args.Value.ToString());
+    }
+
+    private void SendUserInput()
+    {
+
+    }
+
 
 }

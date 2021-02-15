@@ -16,7 +16,7 @@ To start everything will be done client side and investment categories will be h
 User Inputs
 -----------------
 Initial Portfolio Amount
-Annual Withdrawel Amount
+Annual Withdrawal Amount
 Simulation Time Period
 Rebalancing - None, Annual or Semi-Annual
 Asset Allocation by class
