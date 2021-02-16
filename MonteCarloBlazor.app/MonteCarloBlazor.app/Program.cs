@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MonteCarloBlazor.app.Shared;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -18,6 +19,8 @@ namespace MonteCarloBlazor.app
             builder.RootComponents.Add<App>("#app");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddSingleton<StateContainer>();
 
             await builder.Build().RunAsync();
         }
