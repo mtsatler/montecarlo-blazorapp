@@ -6,7 +6,35 @@
 
 @if (StateContainer.InputReceived)
 {
+
+
+
     <h3>Processing Monte Carlo</h3>
+
+
+
+    <p> @testString </p>
+
+    StringTest();
+    GetInputFromStateContainer();
+
+    <p>@testString</p>
+
+    <p>@InitialValue</p>
+
+    <p>First result</p>
+
+    MonteCarloSim.RunOneSimulation();
+
+    <p>Initial Amount: @MonteCarloSim.Simulations[0].StartAmount.ToString()</p>
+    <p>End Amount: @MonteCarloSim.Simulations[0].ResultAmount.ToString()</p>
+
+    MonteCarloSim.RunOneSimulation();
+
+    <p>Initial Amount: @MonteCarloSim.Simulations[1].StartAmount.ToString()</p>
+    <p>End Amount: @MonteCarloSim.Simulations[1].ResultAmount.ToString()</p>
+
+
 }
 else
 {
@@ -15,16 +43,49 @@ else
 
 
 
-@code {      
+@code {
 
+    private int InitialValue { get; set; }
 
+    public int AnnualWithdraw { get; set; }
 
+    public int TimePeriod { get; set; }
 
+    public string Rebalance { get; set; }
+
+    public double AverageReturn { get; set; }
+
+    public double StdDeviation { get; set; }
+
+    private MonteCarlo MonteCarloSim = new MonteCarlo();
+
+    public string testString { get; set; } = "Test";
+
+    private void GetInputFromStateContainer()
+    {
+        InitialValue = StateContainer.InitialValue;
+        AnnualWithdraw = StateContainer.AnnualWithdraw;
+        TimePeriod = StateContainer.TimePeriod;
+        Rebalance = StateContainer.Rebalance;
+        AverageReturn = StateContainer.AverageReturn;
+        StdDeviation = StateContainer.StdDeviation;
+
+        MonteCarloSim = new MonteCarlo(InitialValue, AnnualWithdraw, TimePeriod, Rebalance,
+                       AverageReturn, StdDeviation);
+
+        //testString = MonteCarloSim.ReturnSample();
+    }
+
+    private void StringTest()
+    {
+        testString = "Changed";
+    }
 
     protected override void OnInitialized()
 
     {
         StateContainer.OnChange += StateHasChanged;
+
     }
 
     public void Dispose()
