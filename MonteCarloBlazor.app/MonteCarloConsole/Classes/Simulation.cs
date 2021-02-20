@@ -9,6 +9,7 @@ namespace MonteCarloConsole.Classes
     public class Simulation
     {
 
+        List<SimYear> YearlyResults = new List<SimYear>();
         public bool Result { get; set; } 
 
         public int StartAmount { get; set; }
@@ -18,8 +19,6 @@ namespace MonteCarloConsole.Classes
         public int InvestmentAmount { get; set; }
 
         public int NumYears { get; set; }
-
-        List<SimYear> YearlyResults = new List<SimYear>();
 
         public double AverageReturn { get; set; }
 
@@ -38,7 +37,7 @@ namespace MonteCarloConsole.Classes
             this.STDDeviation = STDDeviation;
         }
 
-        public void RunSimulation()
+        public bool RunSimulation()
         {
             Random rand = new Random();
 
@@ -65,6 +64,8 @@ namespace MonteCarloConsole.Classes
             {
                 Result = false;
             }
+
+            return Result;
         }
 
        

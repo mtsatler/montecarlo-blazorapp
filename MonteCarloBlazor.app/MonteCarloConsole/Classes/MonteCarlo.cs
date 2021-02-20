@@ -22,7 +22,23 @@ namespace MonteCarloConsole.Classes
 
         private double StdDeviation { get; }
 
-        public List<Simulation> Simulations = new List<Simulation>(); 
+        public List<Simulation> Simulations = new List<Simulation>();
+
+        public int successfulSims { get; set; }
+
+        public int totalSims
+        {
+            get
+            {
+                return Simulations.Count;
+            }
+
+            private set
+            {
+                totalSims = value;
+            }
+        }
+               
  
         public MonteCarlo(int InitialValue, int AnnualWithdraw, int TimePeriod, string Rebalance,
                         double AverageReturn, double StdDeviation)
@@ -49,11 +65,31 @@ namespace MonteCarloConsole.Classes
         {
             Simulation thisSim = new Simulation(StartAmount, TimePeriod, InvestmentAmount, AverageReturn, StdDeviation);
 
-            thisSim.RunSimulation();
-
+            if (thisSim.RunSimulation())
+            {
+                successfulSims += 1;
+            }
+            
             Simulations.Add(thisSim);
 
         }
+
+        public void RunNumSimulations(int numToRun)
+        {
+
+            int numberRun = 0;
+
+            while(numberRun < numToRun)
+            {
+                RunOneSimulation();
+
+                numberRun++;
+
+            }
+
+
+        }
+
 
     }
 }

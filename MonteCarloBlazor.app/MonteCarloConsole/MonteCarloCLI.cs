@@ -31,6 +31,14 @@ namespace MonteCarloConsole
             Console.WriteLine("End amount: " + monteCarlo.Simulations[0].EndAmount);
             Console.WriteLine("Success ? : " + monteCarlo.Simulations[0].Result);
 
+            Console.WriteLine();
+
+            Console.WriteLine("Now performing 100 simulations");
+
+            monteCarlo.RunNumSimulations(100);
+
+            Console.WriteLine($"Number Successful: {monteCarlo.successfulSims} of {monteCarlo.totalSims}");
+
         }
 
         public int PromptForInt(string prompt)
