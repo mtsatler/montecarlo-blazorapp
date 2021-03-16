@@ -12,7 +12,6 @@ namespace MonteCarloConsole.Classes
         public int EndValue { get { return _EndValue; } }
 
         private int _EndValue { get; set; }
-       
 
         public int InvestmentAmount { get; set; }
         public double GrowthPercent {get; set;} 

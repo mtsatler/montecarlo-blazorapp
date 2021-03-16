@@ -9,7 +9,7 @@ namespace MonteCarloConsole.Classes
     public class Simulation
     {
 
-        List<SimYear> YearlyResults = new List<SimYear>();
+        public List<SimYear> YearlyResults = new List<SimYear>();
         public bool Result { get; set; } 
 
         public int StartAmount { get; set; }
@@ -24,6 +24,13 @@ namespace MonteCarloConsole.Classes
 
         public double STDDeviation { get; set; }
 
+        public bool Successful { get; set; } = true;
+
+        public int FailureYear { get; set; }
+
+       
+
+
         public Simulation()
         {
         }
@@ -37,6 +44,7 @@ namespace MonteCarloConsole.Classes
             this.STDDeviation = STDDeviation;
         }
 
+        //TODO need to add check for if reached 0, and will need to end simulation at that year
         public bool RunSimulation()
         {
             Random rand = new Random();
@@ -49,9 +57,24 @@ namespace MonteCarloConsole.Classes
                 double growthRate = Normal.Sample(rand, AverageReturn, STDDeviation);
                 SimYear thisYear = new SimYear(initialAmount,InvestmentAmount,growthRate);
 
-                YearlyResults.Add(thisYear);
+                if(thisYear.EndValue <= 0)
+                {
+                    Successful = false;
+                    YearlyResults.Add(thisYear);
+                    FailureYear = i + 1;
+                    return false;
+                }
+                
+
+                if (thisYear.EndValue < 0)
+                {
+                    return false;
+                }
 
                 initialAmount = thisYear.EndValue;
+
+               
+
             }
 
             EndAmount = initialAmount;

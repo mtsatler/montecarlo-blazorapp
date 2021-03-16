@@ -7,5 +7,7 @@ namespace MonteCarloBlazor.app.Pages
 {
     public partial class UserInput
     {
+        //TODO move @code block to here
+
     }
 }

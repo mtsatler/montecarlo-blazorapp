@@ -20,8 +20,8 @@ namespace MonteCarloConsole
             int initialInvestment = PromptForInt("Please enter initial amount of portfolio");
             int annualInvestment = PromptForInt("Please enter annual investment +/-");
             int timePeriod = PromptForInt("Please enter time period in years");
-            double averageAnnualReturn = PromptForDouble("Please enter average annual return as a double ex 0.1 for 10%");
-            double portfolioSTD = PromptForDouble("Please enter standard deviation of portfolio as double ex 0.1 for 10");
+            double averageAnnualReturn = PromptForDouble("Please enter average annual return as a double (ex 0.1 for 10%)");
+            double portfolioSTD = PromptForDouble("Please enter standard deviation of portfolio as double (ex 0.1 for 10)");
 
             MonteCarlo monteCarlo = new MonteCarlo(initialInvestment, annualInvestment, timePeriod, "None", averageAnnualReturn, portfolioSTD);
 
@@ -35,9 +35,13 @@ namespace MonteCarloConsole
 
             Console.WriteLine("Now performing 100 simulations");
 
-            monteCarlo.RunNumSimulations(100);
+            monteCarlo.RunNumSimulations(1000);
 
-            Console.WriteLine($"Number Successful: {monteCarlo.successfulSims} of {monteCarlo.totalSims}");
+            Console.WriteLine($"Number Successful: {monteCarlo.SuccessfulSims} of {monteCarlo.TotalSims}");
+            Console.WriteLine($"Worst Outcome: {monteCarlo.MinResult:C}");
+            Console.WriteLine($"Average Outcome: {monteCarlo.AverageResult:C}");
+            Console.WriteLine($"Best Outcome: {monteCarlo.MaxResult:C}");
+            Console.WriteLine($"Success Rate: {monteCarlo.SuccessRate:P}");
 
         }
 

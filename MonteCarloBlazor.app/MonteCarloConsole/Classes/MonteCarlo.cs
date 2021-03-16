@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MathNet.Numerics.Distributions;
 
-
 namespace MonteCarloConsole.Classes
 {
     public class MonteCarlo
@@ -24,9 +23,59 @@ namespace MonteCarloConsole.Classes
 
         public List<Simulation> Simulations = new List<Simulation>();
 
-        public int successfulSims { get; set; }
+        public int SuccessfulSims { get; set; }
 
-        public int totalSims
+        public int MinResult
+        {
+            get
+            {
+                int minSim = Int32.MaxValue;
+
+                foreach(Simulation sim in Simulations)
+                {
+                    if(sim.EndAmount < minSim)
+                    {
+                        minSim = sim.EndAmount;
+                    }
+                }
+
+                return minSim;
+            }
+        }
+
+        public int MaxResult
+        {
+            get
+            {
+                int maxSim = Int32.MinValue;
+
+                foreach(Simulation sim in Simulations)
+                {
+                    if(sim.EndAmount > maxSim)
+                    {
+                        maxSim = sim.EndAmount;
+                    }
+                        
+                }
+                return maxSim;
+            }
+        }
+
+        public int AverageResult
+        {
+            get
+            {
+                int sumResults = 0;
+
+                foreach(Simulation sim in Simulations)
+                {
+                    sumResults += sim.EndAmount;
+                }
+
+                return sumResults / TotalSims;
+            }
+        }
+        public int TotalSims
         {
             get
             {
@@ -35,10 +84,27 @@ namespace MonteCarloConsole.Classes
 
             private set
             {
-                totalSims = value;
+                TotalSims = value;
             }
         }
-               
+
+        public double SuccessRate
+        {
+            get
+            {
+                if(SuccessfulSims <= 0)
+                {
+                    return 0;
+                }
+                
+                return ((double)SuccessfulSims / (double)TotalSims);
+            }
+        }
+
+        public MonteCarlo()
+        {
+
+        }
  
         public MonteCarlo(int InitialValue, int AnnualWithdraw, int TimePeriod, string Rebalance,
                         double AverageReturn, double StdDeviation)
@@ -67,7 +133,7 @@ namespace MonteCarloConsole.Classes
 
             if (thisSim.RunSimulation())
             {
-                successfulSims += 1;
+                SuccessfulSims += 1;
             }
             
             Simulations.Add(thisSim);
@@ -89,6 +155,8 @@ namespace MonteCarloConsole.Classes
 
 
         }
+
+
 
 
     }
