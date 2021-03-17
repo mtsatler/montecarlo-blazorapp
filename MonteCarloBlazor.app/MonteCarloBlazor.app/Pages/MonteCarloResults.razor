@@ -8,81 +8,43 @@
 {
 
 
-
-    <h3>Processing Monte Carlo</h3>
-
-
-
-    <p> @testString </p>
-
-    StringTest();
     GetInputFromStateContainer();
 
-    <p>@testString</p>
+    MonteCarloSim.RunNumSimulations(5000);
 
-    <p>@InitialValue</p>
-
-    <p>First result</p>
-
-    MonteCarloSim.RunOneSimulation();
-
-    <p>Initial Amount: @MonteCarloSim.Simulations[0].StartAmount.ToString()</p>
-    <p>End Amount: @MonteCarloSim.Simulations[0].EndAmount.ToString()</p>
-
-    MonteCarloSim.RunOneSimulation();
-
-    <p>Initial Amount: @MonteCarloSim.Simulations[1].StartAmount.ToString()</p>
-    <p>End Amount: @MonteCarloSim.Simulations[1].EndAmount.ToString()</p>
+   
 
 
     <table class="table-dark" >
         <tr>
-            <td>Success % </td>
-            <td>@(MonteCarloSim.successfulSims/MonteCarloSim.totalSims)</td>
+            <td>No. of Simulations</td>
+            <td>5000</td>
         </tr>
         <tr>
-            <td>Mean Result</td>
+            <td>Success % </td>
+            <td>@($"{MonteCarloSim.SuccessRate:P2}")</td>
+        </tr>
+        <tr>
+            <td>Average Result</td>
+            <td>@($"{ MonteCarloSim.AverageResult:C2}")</td>
             
         </tr>
         <tr>
-            <td>Min Result</td>
+            <td>Worst Result</td>
+            <td>@($"{MonteCarloSim.MinResult:C2}")</td>
         </tr>
         <tr>
-            <td>Max Result</td>
+            <td>Best Result</td>
+            <td>@($"{MonteCarloSim.MaxResult:C2}")</td>
         </tr>
     </table>
 
-    
-    <table class="table-responsive-md">
-
-        <tr>
-            <td>Year</td>
-            <td>Initial Amount</td>
-            <td>Growth %</td>
-            <td>Investment</td>
-            <td>End Amount</td>
-        </tr>
-
-
-        @for(int i = 0; i < MonteCarloSim.Simulations[0].NumYears; i++)
-        {
-        <tr>
-            <td>@i</td>
-            <td>@MonteCarloSim.Simulations[0].YearlyResults[i].StartValue.ToString()</td>
-            <td>@MonteCarloSim.Simulations[0].YearlyResults[i].GrowthPercent.ToString()</td>
-            <td>@MonteCarloSim.Simulations[0].YearlyResults[i].InvestmentAmount.ToString()</td>
-            <td>@MonteCarloSim.Simulations[0].YearlyResults[i].EndValue.ToString()</td>
-        </tr>
-        }
-
-    </table>
-    
     
 
 }
 else
 {
-    <h3>Please provide input</h3>
+    <h4>Waiting for input</h4>
 }
 
 

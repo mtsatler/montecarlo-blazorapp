@@ -13,7 +13,7 @@ namespace MonteCarloConsole.Classes
 
         private int InvestmentAmount { get;  }
 
-        private int TimePeriod { get;  }
+        public int TimePeriod { get;  }
 
         private string Rebalance { get;  }
 

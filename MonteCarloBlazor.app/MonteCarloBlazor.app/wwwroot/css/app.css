@@ -14,6 +14,14 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+#test{
+    text-decoration-color:aqua;
+}
+
+.test{
+    text-decoration-color: blue;
+}
+
 .content {
     padding-top: 1.1rem;
 }
