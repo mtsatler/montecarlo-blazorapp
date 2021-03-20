@@ -21,6 +21,8 @@ namespace MonteCarloConsole.Classes
 
         private double StdDeviation { get; }
 
+        private List<Asset> PortfolioAllocation { get; set; }
+
         public List<Simulation> Simulations = new List<Simulation>();
 
         public int SuccessfulSims { get; set; }
