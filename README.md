@@ -1,37 +1,17 @@
 # montecarlo-blazorapp
 
-A Client Side Blazor App
+A Blazor WebAssembly app that lets the user run Monte Carlo simulations on an investment portfolio.
 
-Monte Carlo Simulations of Investment Portfolios
+My inspiration for the project was that I wanted to play around with Blazer and see what it was all about, as it is not part of the TE curriculum currently.  I learned that Blazor enables you to write C# code in your web applications that can be executed on the client side via WebAssembly or on the server side.  As we had not yet started to learn Javascript or Vue.js when this project was started, that sounded nifty to me and an easy way to prototype a web app.  For this I chose to just use the client side option and utilized a state container to pass information between the razor elements.  
 
-Goal of project
----------------
-Create a web app that lets a user create an investment portfolio based on asset classes and
-run monte carlo simulations to see expected returns and account balance over time given starting 
-balance and W/D's per year
-
-To start everything will be done client side and investment categories will be hard coded *add custimization later
+I have done Monte Carlo simulations many times in the past using Excel and wanted to see if I could now implete my own solution using C#.  For the statistics methods necessary I used the Math.NET Numberics library.  Cuurently the capabilities of this simulation are quite simple but I would love to continue expanding upon this in the future.  As a Financial Advisor I was often frustrated by the lackluster software options available and look forwared to continue creating custom solutions.
 
 
-User Inputs
------------------
-Initial Portfolio Amount
-Annual Withdrawal Amount
-Simulation Time Period
-Rebalancing - None, Annual or Semi-Annual
-Asset Allocation by class
-    Dynamic List with dropdown selection and text input for percentage allocated
-Number of simulations to run - will have upper limit
-
-Business Logic
---------------
-Runs monte carlo simulation according to inputs
-Outputs outcome to screen in table format, and possibly some nice graphs or user dashboard style
-Potentially could let user save multiple simulations for comparison
 
 
-Future Goals and Ideas
----------
-Could become part of a more comprehensive financial planning app
-If can find info for individual funds via api, let user select individual investments instead of asset classes
-Let user export outcomes to file? Or save to remote database
+
+
+
+
+
+
