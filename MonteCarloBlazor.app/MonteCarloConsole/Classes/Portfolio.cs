@@ -21,11 +21,7 @@ namespace MonteCarloConsole.Classes
 
                 return sum / Assets.Count;
             }
-            private set
-            {
-                AverageReturn = value;
-            }
-
+         
         }
 
         public double StdDeviation
@@ -41,10 +37,7 @@ namespace MonteCarloConsole.Classes
 
                 return sum / Assets.Count;
             }
-            private set
-            {
-                StdDeviation = value;
-            }
+      
         }
 
         /// <summary>
@@ -76,9 +69,9 @@ namespace MonteCarloConsole.Classes
         /// <param name="stdDev"></param>
         public Portfolio(double avgReturn, double stdDev)
         {
-            AverageReturn = avgReturn;
-            StdDeviation = stdDev;
+            Asset newAsset = new Asset("Portfolio", avgReturn, stdDev, 1.00);
 
+            Assets.Add(newAsset);
         }
     }
 }

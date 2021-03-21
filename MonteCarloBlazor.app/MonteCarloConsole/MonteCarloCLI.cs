@@ -33,7 +33,7 @@ namespace MonteCarloConsole
 
             Console.WriteLine();
 
-            Console.WriteLine("Now performing 100 simulations");
+            Console.WriteLine("Now performing 1000 simulations");
 
             monteCarlo.RunNumSimulations(1000);
 

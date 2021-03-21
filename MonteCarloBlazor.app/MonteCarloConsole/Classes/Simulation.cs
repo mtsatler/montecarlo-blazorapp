@@ -28,23 +28,20 @@ namespace MonteCarloConsole.Classes
 
         public int FailureYear { get; set; }
 
-       
-
-
         public Simulation()
         {
         }
 
-        public Simulation(int startAmount,int numYears, int investmentAmount, double averageReturn, double STDDeviation)
+        public Simulation(int startAmount,int numYears, int investmentAmount, Portfolio InvestmentPortfolio)
         {
             StartAmount = startAmount;
             NumYears = numYears;
-            AverageReturn = averageReturn;
+            AverageReturn = InvestmentPortfolio.AverageReturn;
             InvestmentAmount = investmentAmount;
-            this.STDDeviation = STDDeviation;
+            this.STDDeviation = InvestmentPortfolio.StdDeviation;
         }
 
-        //TODO need to add check for if reached 0, and will need to end simulation at that year
+     
         public bool RunSimulation()
         {
             Random rand = new Random();
@@ -72,8 +69,6 @@ namespace MonteCarloConsole.Classes
                 }
 
                 initialAmount = thisYear.EndValue;
-
-               
 
             }
 
