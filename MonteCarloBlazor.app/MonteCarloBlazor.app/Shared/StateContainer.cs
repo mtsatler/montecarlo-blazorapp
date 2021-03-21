@@ -14,7 +14,7 @@ namespace MonteCarloBlazor.app.Shared
 
         public int AnnualWithdraw { get; set; }
 
-        public int TimePeriod { get; set; }
+        public int TimePeriod { get; set; } = 10;
 
         public string Rebalance { get; set; }
 
@@ -24,23 +24,7 @@ namespace MonteCarloBlazor.app.Shared
 
         public event Action OnChange;
 
-        public void SetInputReceived(bool newValue, int initialValue, int AnnualWithdraw, int TimePeriod, string Rebalance,
-                        double AverageReturn, double StdDeviation)
-        {
-            InputReceived = newValue;
-            InitialValue = initialValue;
-            this.AnnualWithdraw = AnnualWithdraw;
-            this.TimePeriod = TimePeriod;
-            this.Rebalance = Rebalance;
-            this.AverageReturn = AverageReturn;
-            this.StdDeviation = StdDeviation;
-
-            NotifyStateChanged();
-        }
-
-        
-
-        private void NotifyStateChanged() => OnChange?.Invoke();
+        public void NotifyStateChanged() => OnChange?.Invoke();
 
     }
 }

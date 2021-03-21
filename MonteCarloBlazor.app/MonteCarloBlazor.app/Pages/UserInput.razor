@@ -6,54 +6,75 @@
 <br />
 
 <h6>Please enter input below.  Input validation has not been implemented yet so be sure to follow instructions</h6>
+<h6>Styling is still a work in progress</h6>
 
-<h6>Also sorry for the lack of styling, it is next on my todo list after validation and we finish our html and css module</h6>
+<br />
+<br />
 
 
-<div>
+<div class="container">
 
-    <br />
-    <br />
 
-    <table>
-        <tr>
-            <td>Portfolio Amount</td>
-            <td><input placeholder="Enter Whole Integer" @bind="getPortfolioAmount" /></td>
-            <td>The starting amount for investment portfolio</td>
-        </tr>
-        <tr>
-            <td>Annual Investment Amount</td>
-            <td><input placeholder="Enter Whole Integer" @bind="getWithdrawalAmount" /></td>
-            <td>Positive amount for additional investment and negative for withdrawals</td>
-        </tr>
-        <tr>
-            <td>Average Annual Return</td>
-            <td><input placeholder="Enter as 0.0 - 1.0" @bind="getAverageReturn" /></td>
-            <td>Anticipated annual return for portfolio</td>
-        </tr>
-        <tr>
-            <td>Standard Deviation</td>
-            <td><input placeholder="Enter .10 for 10 Std Dev" @bind="getStandardDev" /></td>
-            <td>Standard deviation of the portfolio.  Measure of risk and volatility</td>
-        </tr>
-        <tr>
-            <td><label for="YearsToSimSelection">How Many Years to Sim</label></td>
-            <td>             
-                <select name="yearstosim" @onchange="GetYearsToSimSelection">
-                    <option value="10">10 Years</option>
-                    <option value="20">20 Years</option>
-                    <option value="30">30 years</option>
-                </select>
-            </td>
-            <td>How many years for the simulation to run</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="button" @onclick="SendUserInput" value="Run Monte Carlo" /></td>
-            <td></td>
-        </tr>
+    <div class="row">
+        <div class="col-sm-auto">
+            <p>Portfolio Amount</p>
+        </div>
+        <div class="col-sm-auto">
+            <input placeholder="Enter Whole Integer" @bind="inputPortfolioAmount" />
+        </div>
+        <div class="col-sm-auto">
+            <p>The starting amount for investment portfolio</p>
+        </div>
+    </div>
 
-    </table>
+    <div class="row">
+        <div class="col-sm-auto">
+            <p>Annual Investment Amount</p>
+        </div>
+        <div class="col-sm-auto">
+            <input placeholder="Enter Whole Integer" @bind="inputWithdrawalAmount" />
+        </div>
+        <div class="col-sm-auto">
+            <p>Positive amount for additional investment and negative for withdrawals</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-auto">
+            <fieldset>
+                <legend>Asset Allocation Type</legend>
+                <label for="simple">Simple</label>
+                <input type="radio" name="allocation" id="simple" value="simple" @onchange="AllocationSwitch" />
+                <label for="advanced">Advanced</label>
+                <input type="radio" name="allocation" id="advanced" value="advanced" @onchange="AllocationSwitch" />
+            </fieldset>
+        </div>
+    </div>
+
+    @if(allocationType == "simple")
+    {
+        <SimpleAllocation/>
+    }
+
+    <div class="row">
+        <div class="col-sm-auto">
+
+            <label for="YearsToSimSelection">How Many Years to Sim</label>
+
+            <select name="yearstosim" @onchange="GetYearsToSimSelection">
+                <option value="10">10 Years</option>
+                <option value="20">20 Years</option>
+                <option value="30">30 years</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-auto">
+            <input type="button" @onclick="RunMonteCarloSim" value="Run Monte Carlo" />
+        </div>
+    </div>
+
 
     <MonteCarloResults />
 

@@ -9,49 +9,49 @@ namespace MonteCarloBlazor.app.Pages
     public partial class UserInput
     {
 
-        private int initialValue { get; set; }
-
-        private int annualWithdrawal { get; set; }
-
-        private double averageReturn { get; set; }
-
-        private double standardDev { get; set; }
- 
-        private int yearsToSim { get; set; } = 10;
-
-        private string getWithdrawalAmount;
-
-        private string getPortfolioAmount;
-
-        private string getAverageReturn;
-
-        private string getStandardDev;
-
-        
-        private string rebalancingSelection { get; set; } = "None";
-
-        private void GetUserInput()
+        private string inputWithdrawalAmount
         {
-            initialValue = int.Parse(getPortfolioAmount);
-            annualWithdrawal = int.Parse(getWithdrawalAmount);
-            averageReturn = double.Parse(getAverageReturn);
-            standardDev = double.Parse(getStandardDev);
+            get
+            {
+                return StateContainer.AnnualWithdraw.ToString();
+            }
+            set
+            {
+                StateContainer.AnnualWithdraw = int.Parse(value);
+                StateContainer.NotifyStateChanged();
+            }
         }
 
-        private void SendUserInput()
+        private string inputPortfolioAmount
         {
-            GetUserInput();
-            StateContainer.SetInputReceived(true, initialValue, annualWithdrawal, yearsToSim, rebalancingSelection, averageReturn, standardDev);
+            get
+            {
+                return StateContainer.InitialValue.ToString();
+            }
+            set
+            {
+                StateContainer.InitialValue = int.Parse(value);
+                StateContainer.NotifyStateChanged();
+            }
         }
 
-        private void GetRebalancingSelection(ChangeEventArgs args)
+        //radio button selection to determine which razor component to use
+        private string allocationType;
+
+        private void RunMonteCarloSim()
         {
-            rebalancingSelection = args.Value.ToString();
+            StateContainer.InputReceived = true;
+            StateContainer.NotifyStateChanged();
         }
 
         private void GetYearsToSimSelection(ChangeEventArgs args)
         {
-            yearsToSim = int.Parse(args.Value.ToString());
+            StateContainer.TimePeriod = int.Parse(args.Value.ToString());
+        }
+
+        private void AllocationSwitch(ChangeEventArgs args)
+        {
+            allocationType = args.Value.ToString();
         }
 
         protected override void OnInitialized()
