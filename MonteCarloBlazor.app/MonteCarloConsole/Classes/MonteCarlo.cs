@@ -9,19 +9,16 @@ namespace MonteCarloConsole.Classes
     public class MonteCarlo
     {
 
-        private int StartAmount { get;  }
+        private int StartAmount { get; }
 
-        private int InvestmentAmount { get;  }
+        private int InvestmentAmount { get; }
 
-        public int TimePeriod { get;  }
+        public int TimePeriod { get; }
 
-        private string Rebalance { get;  }
+        private string Rebalance { get; }
 
-        private double AverageReturn { get;  }
+        private Portfolio InvestmentPortfolio { get; }
 
-        private double StdDeviation { get; }
-
-        private List<Asset> PortfolioAllocation { get; set; }
 
         public List<Simulation> Simulations = new List<Simulation>();
 
@@ -33,9 +30,9 @@ namespace MonteCarloConsole.Classes
             {
                 int minSim = Int32.MaxValue;
 
-                foreach(Simulation sim in Simulations)
+                foreach (Simulation sim in Simulations)
                 {
-                    if(sim.EndAmount < minSim)
+                    if (sim.EndAmount < minSim)
                     {
                         minSim = sim.EndAmount;
                     }
@@ -51,13 +48,13 @@ namespace MonteCarloConsole.Classes
             {
                 int maxSim = Int32.MinValue;
 
-                foreach(Simulation sim in Simulations)
+                foreach (Simulation sim in Simulations)
                 {
-                    if(sim.EndAmount > maxSim)
+                    if (sim.EndAmount > maxSim)
                     {
                         maxSim = sim.EndAmount;
                     }
-                        
+
                 }
                 return maxSim;
             }
@@ -69,7 +66,7 @@ namespace MonteCarloConsole.Classes
             {
                 int sumResults = 0;
 
-                foreach(Simulation sim in Simulations)
+                foreach (Simulation sim in Simulations)
                 {
                     sumResults += sim.EndAmount;
                 }
@@ -94,11 +91,11 @@ namespace MonteCarloConsole.Classes
         {
             get
             {
-                if(SuccessfulSims <= 0)
+                if (SuccessfulSims <= 0)
                 {
                     return 0;
                 }
-                
+
                 return ((double)SuccessfulSims / (double)TotalSims);
             }
         }
@@ -107,7 +104,7 @@ namespace MonteCarloConsole.Classes
         {
 
         }
- 
+
         public MonteCarlo(int InitialValue, int AnnualWithdraw, int TimePeriod, string Rebalance,
                         double AverageReturn, double StdDeviation)
         {
@@ -115,8 +112,17 @@ namespace MonteCarloConsole.Classes
             InvestmentAmount = AnnualWithdraw;
             this.TimePeriod = TimePeriod;
             this.Rebalance = Rebalance;
-            this.AverageReturn = AverageReturn;
-            this.StdDeviation = StdDeviation;
+            InvestmentPortfolio = new Portfolio(AverageReturn, StdDeviation);
+        }
+
+        public MonteCarlo(int InitialValue, int AnnualWithdraw, int TimePeriod, string Rebalance,
+                            Asset[] Assets)
+        {
+            this.StartAmount = InitialValue;
+            InvestmentAmount = AnnualWithdraw;
+            this.TimePeriod = TimePeriod;
+            this.Rebalance = Rebalance;
+            InvestmentPortfolio = new Portfolio(Assets);
         }
 
         public string ReturnSample()
@@ -124,14 +130,14 @@ namespace MonteCarloConsole.Classes
 
             Random myrand = new Random();
 
-            double result = Normal.Sample(myrand, AverageReturn, StdDeviation);
+            double result = Normal.Sample(myrand, InvestmentPortfolio.AverageReturn, InvestmentPortfolio.StdDeviation);
             
             return result.ToString();
         }
 
         public void RunOneSimulation()
         {
-            Simulation thisSim = new Simulation(StartAmount, TimePeriod, InvestmentAmount, AverageReturn, StdDeviation);
+            Simulation thisSim = new Simulation(StartAmount, TimePeriod, InvestmentAmount, InvestmentPortfolio);
 
             if (thisSim.RunSimulation())
             {
@@ -157,9 +163,6 @@ namespace MonteCarloConsole.Classes
 
 
         }
-
-
-
 
     }
 }
