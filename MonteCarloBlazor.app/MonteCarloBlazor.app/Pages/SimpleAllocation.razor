@@ -1,0 +1,75 @@
+﻿@page "/simpleallocation"
+
+@inject StateContainer StateContainer
+@implements IDisposable
+
+
+
+<div class="row">
+    <div class="col-sm-auto">
+        <p>Average Annual Return</p>
+    </div>
+    <div class="col-sm-auto">
+        <input placeholder="Enter as 0.0 - 1.0" @bind-value="getAverageReturn" />
+    </div>
+    <div class="col-sm-auto">
+        <p>Anticipated annual return for portfolio</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-auto">
+        <p>Standard Deviation</p>
+    </div>
+    <div class="col-sm-auto">
+        <input placeholder="Enter .10 for 10 Std Dev" @bind-value="getStandardDev" />
+    </div>
+    <div class="col-sm-auto">
+        <p>Standard deviation of the portfolio.  Measure of risk and volatility</p>
+    </div>
+</div>
+
+
+
+
+@code {
+
+    //TODO needs data validation and error handling
+    private string getAverageReturn
+    {
+        get
+        {
+            return StateContainer.AverageReturn.ToString();
+        }
+        set
+        {
+            StateContainer.AverageReturn = double.Parse(value);
+            StateContainer.NotifyStateChanged();
+        }
+    }
+
+    //TODO needs data validation and error handling
+    private string getStandardDev
+    {
+        get
+        {
+            return StateContainer.StdDeviation.ToString();
+        }
+        set
+        {
+            StateContainer.StdDeviation = double.Parse(value);
+            StateContainer.NotifyStateChanged();
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        StateContainer.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        StateContainer.OnChange -= StateHasChanged;
+    }
+
+}
