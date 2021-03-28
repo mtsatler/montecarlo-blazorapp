@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonteCarloBlazor.app", "Mon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonteCarloConsole", "MonteCarloConsole\MonteCarloConsole.csproj", "{48089C54-9D9F-4EB4-84CF-E74E4CB952F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonteCarloSeleniumTests", "MonteCarloSeleniumTests\MonteCarloSeleniumTests.csproj", "{045A75F5-04E8-41BC-8571-DBBFFEE2D66B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{48089C54-9D9F-4EB4-84CF-E74E4CB952F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48089C54-9D9F-4EB4-84CF-E74E4CB952F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48089C54-9D9F-4EB4-84CF-E74E4CB952F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{045A75F5-04E8-41BC-8571-DBBFFEE2D66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{045A75F5-04E8-41BC-8571-DBBFFEE2D66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{045A75F5-04E8-41BC-8571-DBBFFEE2D66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{045A75F5-04E8-41BC-8571-DBBFFEE2D66B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
