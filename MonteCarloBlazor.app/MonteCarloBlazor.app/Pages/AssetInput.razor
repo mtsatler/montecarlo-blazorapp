@@ -1,0 +1,36 @@
+﻿
+
+
+<div class="row">
+    <div class="col-sm-auto">
+        <input placeholder="Name" @bind-value="assetName" />
+    </div>
+    <div class="col-sm-auto">
+        <input placeholder="Enter as 0.0 - 1.0" @bind-value="assetAverageReturn" />
+    </div>
+    <div class="col-sm-auto">
+        <input placeholder="Enter as 0.0 - 1.0" @bind-value="assetStdDev" />
+    </div>
+    <div class="col-sm-auto">
+        <input placeholder="Enter as 0.0 - 1.0" @bind-value="assetAllocationPct"/>
+    </div>
+   
+</div>
+
+
+
+
+@code {
+
+    public string assetName { get; set; }
+
+    public double assetAverageReturn { get; set; }
+
+    public double assetStdDev { get; set; }
+
+    public double assetAllocationPct { get; set; }
+
+    //TODO implement component to be used by Advanced Allocation component to create list of manual inputed assets
+
+
+}
